@@ -39,3 +39,10 @@ Patch: Is used to do a partial update. Which means that I can change just one fi
 Delete: Is used to delete a resource
 
 localhost = 127.0.0.1 --> This refers to your own machine
+
+Bootstrap Four tiers of Classes:
+
+xs --> For Mobile Phones (576px)
+sm --> For Tablets (768px)
+md --> For Desktops/Computers (992px)
+lg --> For larger Desktops/Computers (1200px)

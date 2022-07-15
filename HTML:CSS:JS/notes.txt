@@ -46,3 +46,29 @@ xs --> For Mobile Phones (576px)
 sm --> For Tablets (768px)
 md --> For Desktops/Computers (992px)
 lg --> For larger Desktops/Computers (1200px)
+
+local storage:
+- Has no expiration date but user can clear browser data/cache and erase all of it
+- Can only be accessed via JavaScript
+- Storage limit 5 MB
+- Data is never transferred to the server
+- Data is stored in Plain text so it is not secure by design
+- limited to string data so data needs to be serialized | example: "ford focus":"Make: Ford, Model: Focus, Engine: ...."
+- can only be read on client-side
+- open for manipulation
+
+Session storage:
+- Stores data only for a session, data is erased when browser or browser tab are closed
+- data is never trasferred to a server
+- can only be read on client side
+- storage limit is 5-10MB
+- Opening multiple tabs/windows of the same website will create multiple session storages for each tab or window
+- data is limited to key/value pair
+
+Cookies:
+- Stores data that has to be sent back to the server with each subsequent XHR request (XHR - XML HTTP Requests) - XML old data format used for web development, nowadays mostly everyone uses JSON 
+- It has an expiration date and time which varies based on the type of cookie and the expiration duration can be set from either the client-side or server-side.
+- Cookies are primarily for server-side reading, they can be read on the client-side, but it is meant to be server-side reading while local storage and session storage are exclusively client-side reading.
+- Cookie size MUST be less than 4KB
+- Cookies can be made secure by setting the httpOnly flag as true for that cookie. This will prevent client-side access to it.
+- Cookies can be updated, local storage and session storage you can only create or delete. 

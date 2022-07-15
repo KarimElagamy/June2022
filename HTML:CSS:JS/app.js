@@ -1,7 +1,19 @@
 const myBtn = document.getElementById("bgColor");
 
-myBtn.addEventListener('click', () => {
+myBtn.addEventListener("click", () => {
     document.body.style.backgroundColor = "Green";
+})
+
+function resetForm(){
+    document.getElementById("inputEmail").value = "";
+    document.getElementById("inputPassword").value = "";
+}
+
+const resetButton = document.getElementById("clearForm");
+
+resetButton.addEventListener("click", () => {
+    document.getElementById("inputEmail").value = "";
+    document.getElementById("inputPassword").value = "";
 })
 
 //Object Literals
@@ -108,6 +120,185 @@ functionName();
 console.log(salariesArray);
 
 //Iterate through elements in an object
-for (let el in object){
+//for (let el in object){
 
+//}
+
+//local Storage
+localStorage.clear();
+localStorage.setItem('firstItem', 'Strawberry Pancake');
+console.log("First Local Storage Item: " + localStorage.getItem('firstItem'));
+localStorage.setItem('secondItem', 'Chocolate Chip Pancake');
+console.log("First Item: " + localStorage.getItem("firstItem") + ", Second Item: " + localStorage.getItem("secondItem"));
+localStorage.removeItem('firstItem');
+console.log("First Item: " + localStorage.getItem("firstItem") + ", Second Item: " + localStorage.getItem("secondItem"));
+localStorage.clear();
+console.log("First Item: " + localStorage.getItem("firstItem") + ", Second Item: " + localStorage.getItem("secondItem"));
+
+//Session Storage
+let x = 'Strawberry Pancake';
+sessionStorage.setItem('favoriteFood', btoa(x));
+console.log("Encrypted value: " + sessionStorage.getItem('favoriteFood'));
+console.log("Decrypted value: " + atob(sessionStorage.getItem('favoriteFood')));
+sessionStorage.setItem('favoriteFood2', 'ghjlhgsrghsrghsroi');
+console.log(sessionStorage.getItem('favoriteFood') + ", " + sessionStorage.getItem('favoriteFood2'));
+sessionStorage.removeItem('favoriteFood');
+console.log(sessionStorage.getItem('favoriteFood') + ", " + sessionStorage.getItem('favoriteFood2'));
+sessionStorage.clear();
+console.log(sessionStorage.getItem('favoriteFood') + ", " + sessionStorage.getItem('favoriteFood2'));
+
+//Cookies
+document.cookie = "new_Sample_Cookie=This_is_our_Cookie; expires=Mon 5 Sep 2022 12:000:00 UTC; path=/";
+document.cookie = "no_flag_Cookie=This_is_our_cookie_with_no_flags";
+console.log(document.cookie);
+
+//Get Current Date and Time
+var currentDate = new Date();
+console.log(currentDate);
+
+//Add days to current Date and Time
+function addDays(date, days){
+    var result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
 }
+
+//Function Call
+currentDate = addDays(currentDate, 7);
+console.log(currentDate);
+
+//Create Cookie with the Date variable 
+document.cookie = "new_Sample_Cookie2=This_is_our_Cookie; expires="+currentDate+"; path=/";
+console.log(document.cookie);
+
+//XMLHttpRequest GET Request
+var oReq = new XMLHttpRequest();
+oReq.addEventListener("load", reqListener);
+oReq.open("GET", "https://jsonplaceholder.typicode.com/posts/1");
+oReq.send();
+function reqListener(){
+    console.log(this.responseText);
+}
+
+//XMLHttpRequest POST Request
+var pReq = new XMLHttpRequest();
+pReq.addEventListener("load", reqListener);
+pReq.open("POST", "https://jsonplaceholder.typicode.com/posts");
+pReq.send("title=Example POST Request&body=Antra.com&userId=100");
+function reqListener(){
+    console.log(this.responseText);
+}
+
+//Fetch API
+//Getting a Resource
+fetch("https://jsonplaceholder.typicode.com/posts/1")
+.then((response) => response.json())
+.then((json) => console.log(json));
+
+//Creating a Resource
+fetch("https://jsonplaceholder.typicode.com/posts", {
+    method: 'POST',
+    body: JSON.stringify({
+        title: 'Example Post Request',
+        body: 'Antra.com',
+        userId: 101,
+    }),
+    headers: {
+        'Content-type': 'application/json; charset=UTF-8'
+    },
+})
+.then((response) => response.json())
+.then((json) => console.log(json));
+
+//Updating a Resource
+fetch("https://jsonplaceholder.typicode.com/posts/1", {
+    method: 'PUT',
+    body: JSON.stringify({
+        id: 1,
+        title: 'Example Put Request',
+        body: 'Antra.com',
+        userId: 1,
+    }),
+    headers: {
+        'Content-type': 'application/json; charset=UTF-8'
+    },
+})
+.then((response) => response.json())
+.then((json) => console.log(json));
+
+//Partially Updating a Resource
+fetch("https://jsonplaceholder.typicode.com/posts/1", {
+    method: 'PATCH',
+    body: JSON.stringify({
+        title: 'Example Patch Request',
+    }),
+    headers: {
+        'Content-type': 'application/json; charset=UTF-8'
+    },
+})
+.then((response) => response.json())
+.then((json) => console.log(json));
+
+//Deleting a Resource
+fetch("https://jsonplaceholder.typicode.com/posts/1", {
+    method: 'DELETE',
+})
+.then((response) => response.json())
+.then((json) => console.log(json));
+
+const myForm = document.getElementById("myForm");
+
+//Regular Expressions
+//A or a and optionally numbers before an @ symbol + that has to be followed by letters uppercase or lowercase + that has to be followed by .com or .net or .edu or basically a . with text after it
+function ValidateEmail(inputText){
+    var mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (inputText.value.match(mailFormat)){
+        alert("Valid Email Address!");
+        document.myForm.inputEmail.focus();
+        return true;
+    }
+    else {
+        alert("You have entered an invalid Email Address!");
+        document.myForm.inputEmail.focus();
+        return false;
+    }
+}
+
+//Promises: a callback function to initalize a process that takes in two arguments: resolve and reject
+//resolved: the resource was loaded successfully/promise executed successfully
+//rejected: the resource failed to load/promise failed to execute properly
+
+//both of these return something, so the order of resole or reject matters
+//Callback: is essentially a function that is passed in as a parameter
+function promiseDemo(){
+    let p = new Promise(function(resolve, reject){
+        let dept = {
+            id: 1,
+            name: "Full Stack"
+        }
+        resolve(dept);
+        reject("The service is currently unavailable");
+    })
+    p.then(function(d){
+        console.log(d)
+    }).catch(function(e){
+        console.log(e)
+    })
+}
+
+promiseDemo();
+
+//Chaining .thens to transform, format, or otherwise change your data
+
+let p2 = new Promise((resolve,reject) => {
+    resolve(2);
+})
+p2.then(function(d){
+    console.log(d);
+    return d*2;
+}).then(function(d1){
+    console.log(d1);
+    return d1*2;
+}).then(function(d2){
+    console.log(d2);
+})

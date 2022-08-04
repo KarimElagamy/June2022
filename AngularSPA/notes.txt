@@ -1,0 +1,18 @@
+Angular started out as AngularJS and then Angular 2 was released in 2016.
+Angular is made by Google, React is made my Facebook, and Vue.js is from another company
+React is more popular in web development in general but the reason we chose angular was because it is
+more popular with .NET teams and full stack developers. 
+Angular releases a new version every 6 months or so
+Angular Long Term Support is 18 months minimum guarantee per release 
+
+Similarities between C# and Angular:
+Controllers         Components
+Views               Templates
+Attributes          Decorators
+Services            Services
+DI                  DI
+Routing             Routing
+Filters             Guards
+Middleware          Interceptors
+C#                  TypeScript    (Same inventor)
+

@@ -12,6 +12,10 @@ import { FooterComponent } from './Layout/footer.component';
   ],
   imports: [
     CommonModule
+  ],
+  exports: [
+    HeaderComponent,
+    FooterComponent
   ]
 })
 export class CoreModule { }

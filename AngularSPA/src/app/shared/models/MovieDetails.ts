@@ -1,4 +1,4 @@
-import { Genre } from "./genre";
+import { Genre } from "./Genre";
 import { Trailer } from "./Trailer";
 
 export interface MovieDetails{

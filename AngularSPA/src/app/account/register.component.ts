@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { passwordValidatorService } from '../core/Custom Validators/passwordValidator.validator';
+import { AccountService } from '../core/services/account.service';
+import { Register } from '../shared/models/Register';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +14,8 @@ export class RegisterComponent implements OnInit {
 
   registerForm:FormGroup;
   submitted:boolean = false;
-  constructor( private fb:FormBuilder, private customValidator:passwordValidatorService) { }
+  flag:boolean = false;
+  constructor( private fb:FormBuilder, private customValidator:passwordValidatorService, private registerService:AccountService, private _router:Router) { }
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
@@ -30,9 +34,26 @@ export class RegisterComponent implements OnInit {
   onSubmit(){
     this.submitted = true;
     if (this.registerForm.valid){
-      alert('Form Submitted Successfully!! \n Check the values in browser console');
       console.table(this.registerForm.value);
-    }
+      const registration:Register = {
+        email: this.registerForm.controls['email'].value,
+        password: this.registerForm.controls['password'].value,
+        lastName: this.registerForm.controls['lastName'].value,
+        firstName: this.registerForm.controls['firstName'].value,
+        dateOfBirth: this.registerForm.controls['DateOfBirth'].value
+      };
+      this.registerService.Register(registration).subscribe(r => {
+        if (r){
+          this.flag = true;
+          setTimeout(() => {
+            this._router.navigateByUrl('/Account/Login');
+          }, 10000);
+        }
+        else {
+          this.flag = false;
+        };
+      });
+    };
   }
 
 }

@@ -2,6 +2,12 @@
     <div class="row">
         <div class="col-md-8 mx-auto">
             <div class="card">
+                <span class="text-danger" *ngIf="!flag && submitted">
+                    You failed to Register, Please try again!
+                </span>
+                <div class="alert alert-primary" *ngIf="flag">
+                    You Registered Successfully!
+                </div>
                 <div class="card-header">
                     <h3>Angular Reactive Register Form</h3>
                 </div>
@@ -53,7 +59,7 @@
                         </div>
                         <div class="form-group">
                             <label>Date Of Birth</label>
-                            <input type="text" class="form-control" formControlName="DateOfBirth">
+                            <input type="date" class="form-control" formControlName="DateOfBirth">
                             <span class="text-danger" *ngIf="(registerForm.controls['DateOfBirth'].touched || submitted) && (registerForm.controls['DateOfBirth'].errors?.['required'])">
                                 Date of Birth is Required
                             </span>

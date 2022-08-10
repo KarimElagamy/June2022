@@ -6,6 +6,8 @@ import { AddGenreComponent } from './public/genre/add-genre.component';
 import { GenreComponent } from './public/genre/genre.component';
 import { MovieDetailsComponent } from './public/movie/movie-details.component';
 import { MovieComponent } from './public/movie/movie.component';
+import { AuthGuard } from './core/Guards/auth.guard';
+import { AdminGuard } from './core/Guards/admin.guard';
 
 const routes: Routes = [
   { path: "", component: MovieComponent },
@@ -15,8 +17,8 @@ const routes: Routes = [
   { path: "Cast", component: CastComponent },
   { path: "Cast-Details/:castId", component: CastDetailsComponent },
   { path: "Account", loadChildren: () => import("./account/account.module").then(mod => mod.AccountModule) },
-  { path: "Admin", loadChildren: () => import("./admin/admin.module").then(mod => mod.AdminModule) },
-  { path: "User", loadChildren: () => import("./user/user.module").then(mod => mod.UserModule) }
+  { path: "Admin", loadChildren: () => import("./admin/admin.module").then(mod => mod.AdminModule), canActivateChild: [AdminGuard] },
+  { path: "User", loadChildren: () => import("./user/user.module").then(mod => mod.UserModule), canActivateChild: [AuthGuard] }
 ];
 
 @NgModule({

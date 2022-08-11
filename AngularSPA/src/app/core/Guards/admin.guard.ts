@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivateChild, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, CanLoad, Route, RouterStateSnapshot, UrlSegment, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AccountService } from '../services/account.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AdminGuard implements CanActivateChild {
+export class AdminGuard implements CanLoad {
 
   isLoggedIn:boolean = false;
   isAdmin:boolean = false;
 
   constructor(private accountService:AccountService) {}
 
-  canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
+  canLoad(route: Route, segments: UrlSegment[]): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     this.accountService.isLoggedIn.subscribe(data => {
       this.isLoggedIn = data;
     });
@@ -21,7 +21,7 @@ export class AdminGuard implements CanActivateChild {
       this.isAdmin = data.isAdmin;
     });
 
-    if (localStorage.getItem('token') != null && this.isAdmin){
+    if (localStorage.getItem('token') != null && this.isLoggedIn && this.isAdmin){
       return true;
     }
     else {

@@ -5,7 +5,7 @@ export interface User {
     given_name:string;
     Country:string;
     language:string;
-    isAdmin:boolean;
+    isAdmin:string;
     nbf:number;
     exp:number;
     iat:number;

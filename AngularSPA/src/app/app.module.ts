@@ -44,4 +44,4 @@ import { AdminGuard } from './core/Guards/admin.guard';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

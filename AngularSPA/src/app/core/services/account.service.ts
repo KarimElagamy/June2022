@@ -11,7 +11,7 @@ import { User } from 'src/app/shared/models/User';
 })
 export class AccountService {
 
-  private currentUserSubject = new BehaviorSubject<any>({} as any);
+  private currentUserSubject = new BehaviorSubject<User>({} as User);
   public currentUser = this.currentUserSubject.asObservable();
 
   private isLoggedInSubject = new BehaviorSubject<boolean>(false);
@@ -47,11 +47,19 @@ export class AccountService {
 
     if(tokenValue && !this.jwtHelper.isTokenExpired(tokenValue)){
       const decodedToken = this.jwtHelper.decodeToken(tokenValue);
-      console.log(decodedToken.isAdmin);
       this.currentUserSubject.next(decodedToken);
       this.isLoggedInSubject.next(true);
     };
   }
 
+  validateJWT(){
+    //Code to validate token goes here
+    var tokenValue = localStorage.getItem('token');
+    if (tokenValue != null){
+      const decodedToken = this.jwtHelper.decodeToken(tokenValue);
+      this.isLoggedInSubject.next(true);
+      this.currentUserSubject.next(decodedToken);
+    };
+  }
 }
 
